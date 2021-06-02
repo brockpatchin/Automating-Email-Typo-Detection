@@ -20,7 +20,6 @@ def browseFiles():
     realFileName = x[len(x) - 1]
 
     #Uses Pandas and OpenPYXL
-    clean(realFileName)
 
     #Changes label that has been packed into window to new message of "File Opened" after user chooses a file
     label.configure(text="File has successfully been opened!")

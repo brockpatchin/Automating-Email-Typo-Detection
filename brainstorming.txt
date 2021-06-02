@@ -1,0 +1,11 @@
+//Automating Email Typo Detection
+
+
+Using tkinter for UI  
+
+Using pandas, openpyxl, and matplotlib for all of the assorted excel data analysis stuff
+
+    More specfically, this will include opening up the excel spreadsheet into a object in the openpyxl library. 
+    From here, some basic pandas scripts will be used to parse through the spreadsheet object so that the program accesses the correct email column in the spreadsheet itself. 
+    After this is done, some rudimentary python scripts will be used to help distinguish between the emails (possibly  look at email API that knows all possible email handles.)
+    I will then provide the matplotlib library with this data 
