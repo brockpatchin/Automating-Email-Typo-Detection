@@ -4,14 +4,18 @@ from tkinter import filedialog
 
 from data import clean
 
+def get_column_name():
+    global c_name
+    c_name = player_name.get()
+    Label(root, text=f'{c_name} is the column header, thanks!', bg='#ffbf00').pack()
+
 #Browse File Functions using imported filedialog module
 def browseFiles():
     #Sets the acceptable filetypes to CSV and Excel Files
     filetypes = (
         ("Excel Files", "*.xlsx*"), 
-        ("CSV Files", "*.csv*")
         )
-    #Opens up the file dialog menu in which the user can only choose an Excel or a CSV File
+    #Opens up the file dialog menu in which the user can only choose an Excel file
     filename = filedialog.askopenfilename(title = "Select a file", filetypes = filetypes)
     
     
@@ -21,33 +25,59 @@ def browseFiles():
 
     #Uses Pandas and OpenPYXL
 
+    try:
+        clean(filename, c_name)
+    except NameError:
+        error = Label(root, text = "Please enter column name before choosing file!", width = 100, height = 10, fg = "white", bg = "black", font = ("Arial", )).pack()
+    
     #Changes label that has been packed into window to new message of "File Opened" after user chooses a file
     label.configure(text="File has successfully been opened!")
 
 #Creating Window
-window = Tk()
-window.title("Automating Email Typo Detection Tool")
-window.geometry("1024x768")
-window.config(background = "white")
 
-#Creating Label
-label = Label(window, text = "Automating Email Typo Detection", width = 256, height = 16, fg = "black", font = ("Arial", 24))
+if __name__ == '__main__':
+    root = Tk()
+    root.title("Automating Email Typo Detection Tool")
+    root.geometry("1024x768")
+    root.config(background = "white")
 
-#Packing Label into Window
-label.pack()
+    #Creating Label
+    label = Label(root, text = "Automating Email Typo Detection", width = 100, height = 10, fg = "white", bg = "black", font = ("Arial", 24))
+    #Packing Label into Window
+    label.pack()
 
+    #Creating Type-In Thing
 
-#Creating File Browser Button
-button_browse = Button(window, text = "Choose File", command = browseFiles)
+    player_name = Entry(root)
+    player_name.pack(pady=30)
 
-#Packing File Browser Button into Window
-button_browse.pack()
+    Button(
+        root,
+        text="Enter (Please ensure that the column name is correct (case sensitive + spelled correctly)!", 
+        padx=10, 
+        pady=5,
+        command=get_column_name
+        ).pack()
 
-#Creating Exit Button
-button_escape = Button(window, text = "Exit", command = exit)
+    #Creating File Browser Button
+    button_browse = Button(root, 
+                    text = "Choose File", 
+                    command = browseFiles, 
+                    height = 5, 
+                    width = 10)
 
-#Packing Exit Button into Window
-button_escape.pack()
+    #Packing File Browser Button into Window
+    button_browse.pack(side=tk.LEFT, padx=5, pady=5)
 
-#Ends Window Loop
-window.mainloop()
+    #Creating Exit Button
+    button_escape = Button(root, 
+                        text = "Exit", 
+                        command = exit, 
+                        height = 5, 
+                        width = 10)
+
+    #Packing Exit Button into Window
+    button_escape.pack(side=tk.RIGHT, padx=5, pady=5)
+
+    #Ends Window Loop
+    root.mainloop()
