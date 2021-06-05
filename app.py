@@ -18,20 +18,17 @@ def browseFiles():
     #Opens up the file dialog menu in which the user can only choose an Excel file
     filename = filedialog.askopenfilename(title = "Select a file", filetypes = filetypes)
     
+    print(filename)
     
-    #Gets Actual Name of File
-    x = filename.split("/")
-    realFileName = x[len(x) - 1]
-
     #Uses Pandas and OpenPYXL
-
-    try:
-        clean(filename, c_name)
-    except NameError:
-        error = Label(root, text = "Please enter column name before choosing file!", width = 100, height = 10, fg = "white", bg = "black", font = ("Arial", )).pack()
+    
+    #try:
+     #   clean(filename, c_name)
+    #except NameError:
+    #    error = Label(root, text = "Please enter column name before choosing file!", width = 100, height = 10, fg = "white", bg = "black", font = ("Arial", )).pack()
     
     #Changes label that has been packed into window to new message of "File Opened" after user chooses a file
-    label.configure(text="File has successfully been opened!")
+    #label.configure(text="File has successfully been opened!")
 
 #Creating Window
 
