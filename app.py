@@ -19,14 +19,16 @@ def browseFiles():
     filename = filedialog.askopenfilename(title = "Select a file", filetypes = filetypes)
     
     #Uses Pandas and OpenPYXL
-    
+    x = False
     try:
-       clean(filename, c_name)
+        x = clean(filename, c_name)
     except NameError:
         error = Label(root, text = "Please enter column name before choosing file!", width = 100, height = 10, fg = "white", bg = "black", font = ("Arial", )).pack()
     
     #Changes label that has been packed into window to new message of "File Opened" after user chooses a file
-    label.configure(text="File has successfully been opened!")
+
+    if x == True:
+        label.configure(text="File has successfully been opened!")
 
 #Creating Window
 

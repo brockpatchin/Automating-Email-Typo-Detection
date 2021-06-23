@@ -59,6 +59,7 @@ def clean(filename, column_name):
         if email_amounts[x] > total_emails * (0.006):
             most_popular_emails.append(x)
 
+    print("Here are the most common email domains in your excel sheet [they compose more than 0.6 percent of all domains]")
     print(most_popular_emails)
 
     possible_typos = []
@@ -68,6 +69,7 @@ def clean(filename, column_name):
             if similarity_score(x, y) == True and x not in possible_typos and x not in most_popular_emails:
                 possible_typos.append(x)
     
+    print("Here are the tagged domains that could be possible typos. These will be the domains that will be preseneted in a graph that will then be presented to the user")
     print(possible_typos)
 
 clean('C:/Users/brock/OneDrive/Desktop/brock/holdem.xlsx', 'emails')
