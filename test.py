@@ -4,23 +4,24 @@ from openpyxl import Workbook
 
 list_of_domains = []
 
+def split(s, a):
+    result = []
+
+    s.split('@')
+
+    return result
 
 def similarity_score(s, a):
     first = len(s)
     second = len(a)
 
-    if first <= second:
-        length = first
-    else:
-        length = second
-
     counter = 0
 
-    for i in range(length):
+    for i in range(min(first, second)):
         if s[i].lower() == a[i].lower():
             counter += 1
 
-    if counter / length >= 0.85:
+    if counter / max(first, second) >= 0.85:
         return True
     else:
         return False
@@ -59,7 +60,7 @@ def clean(filename, column_name):
         if email_amounts[x] > total_emails * (0.006):
             most_popular_emails.append(x)
 
-    print("Here are the most common email domains in your excel sheet [they compose more than 0.6 percent of all domains]")
+    print("Here are the most common email domains in your excel sheet")
     print(most_popular_emails)
 
     possible_typos = []
