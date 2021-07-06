@@ -4,12 +4,10 @@ from openpyxl import Workbook
 
 list_of_domains = []
 
-def split(s, a):
-    result = []
-
-    s.split('@')
-
-    return result
+def split(s):
+    temp = s.split('@')[1]
+    new = temp[0:len(temp)-2]
+    return new
 
 def similarity_score(s, a):
     first = len(s)
@@ -21,7 +19,7 @@ def similarity_score(s, a):
         if s[i].lower() == a[i].lower():
             counter += 1
 
-    if counter / max(first, second) >= 0.85:
+    if counter / max(first, second) >= 0.75:
         return True
     else:
         return False
@@ -38,10 +36,11 @@ def clean(filename, column_name):
     total_emails = len(list_of_emails)
 
     for i in list_of_emails:
-        if str(i) not in email_amounts.keys():
-            email_amounts[str(i)] = 1
+        temp = split(str(i))
+        if temp not in email_amounts.keys():
+            email_amounts[temp] = 1
         else:
-            email_amounts[str(i)] += 1
+            email_amounts[temp] += 1
 
     total_domains = len(email_amounts)
     
@@ -49,11 +48,6 @@ def clean(filename, column_name):
     print("More specifically, there are " + str(total_domains) + " unique email domains.")
 
     most_popular_emails = []
-
-    #Test
-    #for x in email_amounts.keys():
-    #    if email_amounts[x] > 1:
-    #        print(x + " has " + str(email_amounts[x]) + " occurences!")
 
     #Creating a list that holds the most common emails (specifically trying to avoid typo emails so this list will include only the most popular email domains)
     for x in email_amounts.keys():

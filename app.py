@@ -13,7 +13,7 @@ def get_column_name():
 def browseFiles():
     #Sets the acceptable filetypes to CSV and Excel Files
     filetypes = (
-        ("Excel Files", "*.xlsx*"), 
+        ("Excel Files", "*.xlsx*"),
         )
     #Opens up the file dialog menu in which the user can only choose an Excel file
     filename = filedialog.askopenfilename(title = "Select a file", filetypes = filetypes)
