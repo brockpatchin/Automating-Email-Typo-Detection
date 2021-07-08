@@ -1,5 +1,5 @@
 import pandas as pd
-import matplotlib as mat
+import matplotlib.pyplot as plt
 from openpyxl import Workbook
 
 list_of_domains = []
@@ -57,14 +57,22 @@ def clean(filename, column_name):
     print("Here are the most common email domains in your excel sheet")
     print(most_popular_emails)
 
-    possible_typos = []
+    possible_typos = {}
 
     for x in email_amounts.keys():
         for y in most_popular_emails:
             if similarity_score(x, y) == True and x not in possible_typos and x not in most_popular_emails:
-                possible_typos.append(x)
+                possible_typos[x] = email_amounts[x]
     
-    print("Here are the tagged domains that could be possible typos. These will be the domains that will be preseneted in a graph that will then be presented to the user")
+    print("Here are the tagged domains that could be possible typos.")
+    # These are the email domains that will be presented to the user in a graphical format. 
     print(possible_typos)
+
+    plt.bar(possible_typos.keys(), possible_typos.values())
+    plt.xticks(rotation = 90)
+    plt.show()
+
+
+
 
 clean('C:/Users/brock/OneDrive/Desktop/brock/holdem.xlsx', 'emails')

@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
 
-from data import clean
+from data import clean 
 
 def get_column_name():
     global c_name
@@ -30,6 +30,8 @@ def browseFiles():
     if x == True:
         label.configure(text="File has successfully been opened!")
 
+
+
 #Creating Window
 
 if __name__ == '__main__':
@@ -48,7 +50,9 @@ if __name__ == '__main__':
     player_name = Entry(root)
     player_name.pack(pady=30)
 
-    Button(
+
+    #Creating column name button
+    column_name = Button(
         root,
         text="Enter (Please ensure that the column name is correct (case sensitive + spelled correctly)!", 
         padx=10, 
