@@ -1,13 +1,16 @@
 import tkinter as tk
+import time
 from tkinter import *
 from tkinter import filedialog
 
-from data import clean 
+from data import * 
 
 def get_column_name():
     global c_name
     c_name = player_name.get()
-    Label(root, text=f'{c_name} is the column header, thanks!', bg='#ffbf00').pack()
+    column_label = Label(root, text=f'{c_name} is the column header, thanks!', bg='#ffbf00')
+    column_label.pack()
+
 
 #Browse File Functions using imported filedialog module
 def browseFiles():
@@ -23,14 +26,21 @@ def browseFiles():
     try:
         x = clean(filename, c_name)
     except NameError:
-        error = Label(root, text = "Please enter column name before choosing file!", width = 100, height = 10, fg = "white", bg = "black", font = ("Arial", )).pack()
+        error = Label(root, text = "Please enter column name before choosing file!", width = 100, height = 10, fg = "white", bg = "black", font = ("Arial"))
+        error.pack()
     
     #Changes label that has been packed into window to new message of "File Opened" after user chooses a file
 
     if x == True:
         label.configure(text="File has successfully been opened!")
 
-
+        graph_button = Button(
+            root,
+            text="Click for Graph of possible typos!", 
+            padx=10, 
+            pady=25,
+            command = show_graph
+        ).pack()
 
 #Creating Window
 
@@ -58,7 +68,7 @@ if __name__ == '__main__':
         padx=10, 
         pady=5,
         command=get_column_name
-        ).pack()
+    ).pack()
 
     #Creating File Browser Button
     button_browse = Button(root, 

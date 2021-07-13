@@ -4,6 +4,8 @@ from openpyxl import Workbook
 
 list_of_domains = []
 
+possible_typos = {}
+
 def split(s):
     temp = s.split('@')[1]
     new = temp[0:len(temp)-2]
@@ -57,8 +59,6 @@ def clean(filename, column_name):
     print("Here are the most common email domains in your excel sheet")
     print(most_popular_emails)
 
-    possible_typos = {}
-
     for x in email_amounts.keys():
         for y in most_popular_emails:
             if similarity_score(x, y) == True and x not in possible_typos and x not in most_popular_emails:
@@ -68,6 +68,7 @@ def clean(filename, column_name):
     # These are the email domains that will be presented to the user in a graphical format. 
     print(possible_typos)
 
+def show_graph():
     plt.bar(possible_typos.keys(), possible_typos.values())
     plt.xticks(rotation = 90)
     plt.show()
@@ -76,3 +77,4 @@ def clean(filename, column_name):
 
 
 clean('C:/Users/brock/OneDrive/Desktop/brock/holdem.xlsx', 'emails')
+show_graph()
